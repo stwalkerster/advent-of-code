@@ -1,3 +1,2 @@
 .ipynb_checkpoints
-input.txt
-example.txt
+*.txt
