@@ -31,7 +31,8 @@ def part2(inputFile):
         if l == "":
             continue
 
-        matches = re.findall(r'one|two|three|four|five|six|seven|eight|nine|\d', l)
+        pattern = r'one|two|three|four|five|six|seven|eight|nine'
+        matches = re.search(pattern + r'|\d', l)
 
         first = None
         last = None
@@ -48,17 +49,20 @@ def part2(inputFile):
             'nine': '9',
         }
 
-        if matches[0].isdigit():
-            first = matches[0]
+        if matches.group(0).isdigit():
+            first = matches.group(0)
         else:
-            first = lookup[matches[0]]
+            first = lookup[matches.group(0)]
 
-        if matches[-1].isdigit():
-            last = matches[-1]
+
+        matches = re.search(pattern[::-1] + r'|\d', l[::-1])
+
+        if matches.group(0).isdigit():
+            last = matches.group(0)
         else:
-            last = lookup[matches[-1]]
+            last = lookup[matches.group(0)[::-1]]
 
-        print(l, '|', matches[0], first, '/', matches[-1], last, '=', int(first+last))
+        #print(l, '|',  first, '/', last, '=', int(first+last))
 
         total += int(first + last)
     print(total)
