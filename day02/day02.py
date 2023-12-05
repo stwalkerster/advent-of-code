@@ -1,7 +1,7 @@
 import re
 
 def parse(inputFile):
-    input = open('data/day02/' + inputFile).read().split('\n')
+    input = open(inputFile).read().split('\n')
 
     games = []
     for line in input:

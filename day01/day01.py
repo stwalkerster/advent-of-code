@@ -2,7 +2,7 @@ import re
 
 
 def part1(inputFile):
-    input = open('data/day01/' + inputFile).read().split('\n')
+    input = open(inputFile).read().split('\n')
 
     total = 0
     for l in input:
@@ -24,7 +24,7 @@ def part1(inputFile):
     print(total)
 
 def part2(inputFile):
-    input = open('data/day01/' + inputFile).read().split('\n')
+    input = open(inputFile).read().split('\n')
 
     total = 0
     for l in input:

@@ -18,7 +18,7 @@ class Almanac:
         return value
 
 def part1(inputFile):
-    raw_input = open('data/day05/' + inputFile).read().split('\n\n')
+    raw_input = open(inputFile).read().split('\n\n')
     seeds = [int(s) for s in raw_input[0].split(': ')[1].split()]
     almanacs = [Almanac(i) for i in raw_input[1::]]
 
@@ -33,7 +33,7 @@ def part1(inputFile):
     print(min(locations))
 
 def part2_naive(inputFile):
-    raw_input = open('data/day05/' + inputFile).read().split('\n\n')
+    raw_input = open(inputFile).read().split('\n\n')
     seed_data = [int(s) for s in raw_input[0].split(': ')[1].split()]
 
     seed_ranges = []
@@ -62,7 +62,7 @@ def part2_naive(inputFile):
     print(min(min_locations))
 
 def part2(inputFile):
-    raw_input = open('data/day05/' + inputFile).read().split('\n\n')
+    raw_input = open(inputFile).read().split('\n\n')
 
     seed_data = [int(s) for s in raw_input[0].split(': ')[1].split()]
     seed_ranges = []

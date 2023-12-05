@@ -1,7 +1,7 @@
 import re
 
 def part1(inputFile):
-    input = open('data/day03/' + inputFile).read().split('\n')
+    input = open(inputFile).read().split('\n')
 
     total = 0
 
@@ -42,7 +42,7 @@ def part1(inputFile):
     print(total)
 
 def part2(inputFile):
-    input = open('data/day03/' + inputFile).read().split('\n')
+    input = open(inputFile).read().split('\n')
 
     possible_gears = [ ]
 

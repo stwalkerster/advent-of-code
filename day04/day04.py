@@ -13,7 +13,7 @@ class Card:
         return self.all_winning_numbers.intersection(self.own_numbers)
 
 def part1(inputFile):
-    input = open('data/day04/' + inputFile).read().split('\n')
+    input = open(inputFile).read().split('\n')
 
     card_data = [len(Card(i).get_my_winning_numbers()) for i in input if i != ""]
 
@@ -24,7 +24,7 @@ def part1(inputFile):
     print(sum(scores))
 
 def part2(inputFile):
-    input = open('data/day04/' + inputFile).read().split('\n')
+    input = open(inputFile).read().split('\n')
     cards = [Card(i) for i in input if i != ""]
     card_count = {c.id: 1 for c in cards}
 
