@@ -1,4 +1,5 @@
 import re
+import math
 
 def parse(inputFile):
     d, g = open(inputFile).read().split('\n\n')
@@ -36,24 +37,31 @@ def part1(inputFile):
 def part2(inputFile):
     directions, graph = parse(inputFile)
 
-    direction_position = 0
-    steps = 0
-
     nodes = [i for i in graph.keys() if i.endswith('A')]
 
-    print("Analysing %d nodes" % len(nodes), nodes)
+    step_count = []
+    for n in nodes:
+        steps = 0
+        current = n
+        direction_position = 0
 
-    while len(nodes) != len([1 for i in nodes if i.endswith('Z')]):
-        for i in range(0, len(nodes)):
+        while True:
             if directions[direction_position] == "L":
-                nodes[i] = graph[nodes[i]][0]
+                current = graph[current][0]
             else:
-                nodes[i] = graph[nodes[i]][1]
+                current = graph[current][1]
 
-        steps += 1
-        direction_position = (direction_position + 1) % len(directions)
+            direction_position = (direction_position + 1) % len(directions)
+            steps += 1
 
-    print(steps)
+            if current.endswith('Z'):
+                print(n, steps, current)
+                step_count.append(steps)
+                break
+
+    print(step_count)
+
+    print(math.lcm(*step_count))
 
 
 if __name__ == '__main__':
