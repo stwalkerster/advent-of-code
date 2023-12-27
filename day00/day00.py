@@ -1,9 +1,9 @@
 def part1(inputFile):
-    input = open(inputFile).read().split('\n')
+    input = [line for line in open(inputFile).read().split('\n') if line != ""]
 
 
 def part2(inputFile):
-    input = open(inputFile).read().split('\n')
+    input = [line for line in open(inputFile).read().split('\n') if line != ""]
 
 
 if __name__ == '__main__':
