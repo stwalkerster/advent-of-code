@@ -87,20 +87,23 @@ def part1(input_file):
                 grid[position[1] + i][position[0]] = '#'
             position = (position[0], position[1] + distance)
 
-    # flood-fill inside
+    # flood-fill
     grid[0][0] = 'x'
+
+    # fill edges
+    for y in range(len(grid)):
+        for x in range(len(grid[y])):
+            if x == 0 or y == 0 or x == len(grid[y]) - 1 or y == len(grid) - 1:
+                grid[y][x] = 'x'
+                continue
 
     changed = True
     while changed:
         changed = False
+
         for y in range(len(grid)):
             for x in range(len(grid[y])):
                 if grid[y][x] in ('x', '#'):
-                    continue
-
-                if x == 0 or y == 0 or x == len(grid[y]) - 1 or y == len(grid) - 1:
-                    grid[y][x] = 'x'
-                    changed = True
                     continue
 
                 if x - 1 >= 0 and grid[y][x - 1] == 'x':
@@ -113,6 +116,11 @@ def part1(input_file):
                     changed = True
                     continue
 
+        for y in range(len(grid) - 1, 0, -1):
+            for x in range(len(grid[y]) - 1, 0, -1):
+                if grid[y][x] in ('x', '#'):
+                    continue
+
                 if x + 1 < len(grid[y]) and grid[y][x + 1] == 'x':
                     grid[y][x] = 'x'
                     changed = True
@@ -122,10 +130,6 @@ def part1(input_file):
                     grid[y][x] = 'x'
                     changed = True
                     continue
-
-
-
-    display(grid)
 
     dug_blocks = sum([sum([1 for x in range(len(grid[y])) if grid[y][x] in ('#', '.')]) for y in range(len(grid))])
     print(dug_blocks)
