@@ -1,5 +1,5 @@
 from termcolor import colored
-import re
+
 
 def display(d):
     print()
@@ -87,6 +87,10 @@ def part1(input_file):
                 grid[position[1] + i][position[0]] = '#'
             position = (position[0], position[1] + distance)
 
+    dug_blocks = sum([sum([1 for x in range(len(grid[y])) if grid[y][x] in ('#')]) for y in range(len(grid))])
+    print("trench blocks", dug_blocks)
+
+
     # flood-fill
     grid[0][0] = 'x'
 
@@ -132,12 +136,68 @@ def part1(input_file):
                     continue
 
     dug_blocks = sum([sum([1 for x in range(len(grid[y])) if grid[y][x] in ('#', '.')]) for y in range(len(grid))])
-    print(dug_blocks)
+    print("total blocks", dug_blocks)
 
 
-def part2(input_file):
+def part2(input_file, mode=2):
     data = [line for line in open(input_file).read().split('\n') if line != ""]
+
+    coord_list = []
+    position = (0, 0)
+
+    perimeter = 0
+
+    for line in data:
+        if mode == 1:
+            direction, dstr, _ = line.split(' ')
+            distance = int(dstr)
+        else:
+            _, _, hexstr = line.split(' ')
+            hexstr = hexstr.replace('(', '').replace(')', '').replace('#', '')
+
+            if hexstr[-1] == '0':
+                direction = 'R'
+            elif hexstr[-1] == '1':
+                direction = 'D'
+            elif hexstr[-1] == '2':
+                direction = 'L'
+            elif hexstr[-1] == '3':
+                direction = 'U'
+
+            hexstr = hexstr[:-1:]
+            distance = int(hexstr, 16)
+
+        #print(direction, distance)
+        perimeter += distance
+
+
+        if direction == 'R':
+            position = (position[0] + distance, position[1])
+            coord_list.append(position)
+        if direction == 'L':
+            position = (position[0] - distance, position[1])
+            coord_list.append(position)
+        if direction == 'U':
+            position = (position[0], position[1] - distance)
+            coord_list.append(position)
+        if direction == 'D':
+            position = (position[0], position[1] + distance)
+            coord_list.append(position)
+
+    min_x, min_y = (0, 0)
+    for coord in coord_list:
+        min_x = min(min_x, coord[0])
+        min_y = min(min_y, coord[1])
+
+    print("Offsets:", (min_x, min_y))
+
+    x, y = list(zip(*coord_list))
+
+    # shoelace
+    area = (sum(i*j for i, j in zip(x, y[1:] + y[:1])) - sum(i*j for i, j in zip(x[1:] + x[:1], y)))/2
+    # pick's theorem
+    print(int(area + (perimeter/2) + 1))
 
 
 if __name__ == '__main__':
-    part1("input.txt")
+    part2("input.txt", 2)
