@@ -1,5 +1,3 @@
-# from math import abs
-
 def part1(input_file):
     data = [line.split('   ') for line in open(input_file).read().split('\n') if line != ""]
 
@@ -10,7 +8,7 @@ def part1(input_file):
 
     deltas = [abs(x - y) for x, y in zip(list1, list2)]
 
-    print(sum(deltas))
+    return sum(deltas)
 
 
 def part2(input_file):
@@ -25,8 +23,8 @@ def part2(input_file):
     for i in list1:
         similarity += i * list2.count(i)
 
+    return similarity
 
-    print(similarity)
 
 if __name__ == '__main__':
-    part2("input.txt")
+    print(part2("input.txt"))
