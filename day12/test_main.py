@@ -17,11 +17,25 @@ def test_part1_input():
     assert part1("input.txt") == 1488414
 
 
-@pytest.mark.skip(reason="not implemented")
 def test_part2_example():
-    assert part2("example.txt") == 0
+    assert part2("example.txt") == 80
 
 
-@pytest.mark.skip(reason="not implemented")
+def test_part2_example2():
+    assert part2("example2.txt") == 436
+
+
+def test_part2_example3():
+    assert part2("example3.txt") == 1206
+
+
+def test_part2_example4():
+    assert part2("example4.txt") == 236
+
+
+def test_part2_example5():
+    assert part2("example5.txt") == 368
+
+
 def test_part2_input():
-    assert part2("input.txt") == 0
+    assert part2("input.txt") == 911750
