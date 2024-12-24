@@ -70,10 +70,12 @@ def part1(input_file):
             meta[last_region] = Region(last_region)
             flood_fill(data, x, y, last_region, meta)
 
-    print(sum([meta[y].cost() for y in meta]))
+    return sum([meta[y].cost() for y in meta])
 
 def part2(input_file):
     data = [line for line in open(input_file).read().split('\n') if line != ""]
+
+    return None
 
 
 if __name__ == '__main__':
